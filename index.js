@@ -131,4 +131,5 @@ formPay.addEventListener("click", () => {
     checkoutSection.style.display = "none"
     form.style.display = "none"
     itemsBought = []
+    pizza = burger = fries = 0
 })
