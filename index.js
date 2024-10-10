@@ -11,9 +11,13 @@ const cancelbtn = document.getElementById("cancel");
 const userName = document.getElementById("name");
 const afterPayment = document.getElementById("afterPayment");
 const formPay = document.getElementById("formPay");
+
 let name = ''
 let itemsBought = []
-
+let pizza = 0
+let burger = 0
+let fries = 0
+let total = 0
 
 menuItems.forEach(function (x) {
     
@@ -36,8 +40,32 @@ menu.addEventListener("click", function (e) {
     const a = e.target.id
     menuItems.forEach(x => {
         if (x.name == a) {
+
+            if (a === "Pizza") {
+                pizza++;  
+                if (!itemsBought.includes(x)) {
+                    itemsBought.push(x);
+                    console.log("Yes")
+                }
+            }
+
+            if (a === "Hamburger") {
+              burger++;
+              if (!itemsBought.includes(x)) {
+                itemsBought.push(x);
+                console.log("Yes");
+              }
+            }
+            
+            if (a === "Fries") {
+              fries++;
+              if (!itemsBought.includes(x)) {
+                itemsBought.push(x);
+                console.log("Yes");
+              }
+            }
+
             console.log(x.name)
-            itemsBought.push(x)
             console.log(itemsBought);
         }
     })
@@ -52,21 +80,44 @@ menu.addEventListener("click", function (e) {
 function render() {
     checkoutItems.innerHTML = ''
     itemsBought.forEach((x) => {
-        checkoutItems.innerHTML += `
-        <div class="itemName">
-            <p>${x.name}</p>
-            <p id="remove">Remove</p>
-            <p id="price">$${x.price}</p>
-        </div>    
-    `;
+        if (x.name == "Pizza") {
+            checkoutItems.innerHTML += `
+                <div class="itemName">
+                    <p>${x.name} X ${pizza}</p>
+                    <p id="remove">Remove</p>
+                    <p id="price">$${x.price*pizza}</p>
+                </div>    
+                `;
+        }
+
+        if (x.name == "Hamburger") {
+            checkoutItems.innerHTML += `
+                <div class="itemName">
+                    <p>${x.name} X ${burger}</p>
+                    <p id="remove">Remove</p>
+                    <p id="price">$${x.price*burger}</p>
+                </div>    
+                `;
+        }
+
+        if (x.name == "Fries") {
+            checkoutItems.innerHTML += `
+                <div class="itemName">
+                    <p>${x.name} X ${fries}</p>
+                    <p id="remove">Remove</p>
+                    <p id="price">$${x.price*fries}</p>
+                </div>    
+                `;
+        }
+        total = pizza * 14 + burger * 12 + fries * 8;
         
     })
-    console.log(itemsBought)
+    // console.log(itemsBought)
     const a = itemsBought.reduce((total, current) => total + current.price, 0,)
-    console.log(a);
+    // console.log(a);
 
-    totalPrice.innerHTML = `Total Price :<span>$${a}</span>`;  
-    payonFrom.innerHTML = `Pay $${a}`
+    totalPrice.innerHTML = `Total Price :<span>$${total}</span>`;  
+    payonFrom.innerHTML = `Pay $${total}`
 }
 
 form.addEventListener("click", (x) => x.preventDefault())
