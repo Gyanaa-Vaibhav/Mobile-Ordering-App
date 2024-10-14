@@ -84,7 +84,7 @@ function render() {
             checkoutItems.innerHTML += `
                 <div class="itemName">
                     <p>${x.name} X ${pizza}</p>
-                    <p id="remove">Remove</p>
+                    <p onclick="this.parentNode.remove()" id="remove">Remove</p>
                     <p id="price">$${x.price*pizza}</p>
                 </div>    
                 `;
@@ -94,8 +94,8 @@ function render() {
             checkoutItems.innerHTML += `
                 <div class="itemName">
                     <p>${x.name} X ${burger}</p>
-                    <p id="remove">Remove</p>
-                    <p id="price">$${x.price*burger}</p>
+                    <p onclick="this.parentNode.remove()" id="remove">Remove</p>
+                    <p id="price">$${x.price * burger}</p>
                 </div>    
                 `;
         }
@@ -104,8 +104,8 @@ function render() {
             checkoutItems.innerHTML += `
                 <div class="itemName">
                     <p>${x.name} X ${fries}</p>
-                    <p id="remove">Remove</p>
-                    <p id="price">$${x.price*fries}</p>
+                    <p onclick="this.parentNode.remove()" id="remove">Remove</p>
+                    <p id="price">$${x.price * fries}</p>
                 </div>    
                 `;
         }
