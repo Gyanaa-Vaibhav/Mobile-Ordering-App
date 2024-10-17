@@ -1,16 +1,19 @@
 import menuItems from "./data.js"
 
-const menu = document.getElementById("main")
-const checkoutItems = document.getElementById("checkoutItems");
+const getEleById = (element) => document.getElementById(element)
+
+const menu = getEleById("main")
+const checkoutItems = getEleById("checkoutItems");
+const totalPrice = getEleById("totalPrice");
+const form = getEleById("form")
+const payonFrom = getEleById("formPay");
+const orderComplete = getEleById("orderComplete");
+const cancelbtn = getEleById("cancel");
+const userName = getEleById("name");
+const afterPayment = getEleById("afterPayment");
+const formPay = getEleById("formPay");
+
 const checkoutSection = document.querySelector(".checkoutSection");
-const totalPrice = document.getElementById("totalPrice");
-const form = document.getElementById("form")
-const payonFrom = document.getElementById("formPay");
-const orderComplete = document.getElementById("orderComplete");
-const cancelbtn = document.getElementById("cancel");
-const userName = document.getElementById("name");
-const afterPayment = document.getElementById("afterPayment");
-const formPay = document.getElementById("formPay");
 
 let name = ''
 let itemsBought = []
@@ -37,19 +40,19 @@ menuItems.forEach(function (x) {
 );
 
 menu.addEventListener("click", function (e) {
-    const a = e.target.id
+    const selectedItem = e.target.id;
     menuItems.forEach(x => {
-        if (x.name == a) {
+        if (x.name == selectedItem) {
 
-            if (a === "Pizza") {
-                pizza++;  
-                if (!itemsBought.includes(x)) {
-                    itemsBought.push(x);
-                    console.log("Yes")
-                }
+            if (selectedItem === "Pizza") {
+              pizza++;
+              if (!itemsBought.includes(x)) {
+                itemsBought.push(x);
+                console.log("Yes");
+              }
             }
 
-            if (a === "Hamburger") {
+            if (selectedItem === "Hamburger") {
               burger++;
               if (!itemsBought.includes(x)) {
                 itemsBought.push(x);
@@ -57,7 +60,7 @@ menu.addEventListener("click", function (e) {
               }
             }
             
-            if (a === "Fries") {
+            if (selectedItem === "Fries") {
               fries++;
               if (!itemsBought.includes(x)) {
                 itemsBought.push(x);
@@ -72,12 +75,12 @@ menu.addEventListener("click", function (e) {
 
     if (itemsBought.length > 0) {
         checkoutSection.style.display = "flex";
-        render()
+        rendertoCheckout();
     }
 })
 
 
-function render() {
+function rendertoCheckout() {
     checkoutItems.innerHTML = ''
     itemsBought.forEach((x) => {
         if (x.name == "Pizza") {
